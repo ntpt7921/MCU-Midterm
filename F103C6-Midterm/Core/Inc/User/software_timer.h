@@ -10,12 +10,13 @@
 
 #include "main.h"
 
+#define TIMER_TICK_DURATION_MS 10
+
 typedef enum
 {
 	TIMER_FLAG_RESET = RESET, TIMER_FLAG_SET = SET,
 } Timer_flag_state_t;
 
-extern const int TIMER_TICK_DURATION_MS;
 
 typedef struct
 {

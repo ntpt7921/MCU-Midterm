@@ -9,7 +9,6 @@
 
 // since timer will be update every tick duration, it can only register
 // event with the smallest time scale of tick duration (in this case TIMER_TICK_DURATION_MS)
-const int TIMER_TICK_DURATION_MS = 10;
 
 void software_timer_set_duration_ms(volatile Software_timer_t *tm, uint32_t ms)
 {
