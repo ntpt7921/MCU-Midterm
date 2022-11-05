@@ -95,14 +95,17 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-        if (software_timer_is_set(&led_blink))
-        {
-            software_timer_set_duration_ms(&led_blink, LED_BLINK_PERIOD_MS);
-            HAL_GPIO_TogglePin(LED_BLINK_GPIO_Port, LED_BLINK_Pin);
-        }
-		FSM_state_t next_state = FSM_get_next_state(&fsm_count, FSM_count_get_next_state);
-		FSM_set_to_next_state(&fsm_count, next_state, FSM_count_set_to_next_state);
-		FSM_do_action_within_state(&fsm_count, FSM_count_do_action_within_state);
+		if (software_timer_is_set(&led_blink))
+		{
+			software_timer_set_duration_ms(&led_blink, LED_BLINK_PERIOD_MS);
+			HAL_GPIO_TogglePin(LED_BLINK_GPIO_Port, LED_BLINK_Pin);
+		}
+		FSM_state_t next_state = FSM_get_next_state(&fsm_count,
+				FSM_count_get_next_state);
+		FSM_set_to_next_state(&fsm_count, next_state,
+				FSM_count_set_to_next_state);
+		FSM_do_action_within_state(&fsm_count,
+				FSM_count_do_action_within_state);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -237,8 +240,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	// this function run every 10ms due to timer 2 update
 	if (htim->Instance == TIM2)
 	{
-        software_timer_update_after_tick(&timer_10s);
-        software_timer_update_after_tick(&led_blink);
+		software_timer_update_after_tick(&timer_10s);
+		software_timer_update_after_tick(&led_blink);
 
 		button_poll_and_update_state(&button_reset);
 		button_poll_and_update_state(&button_inc);
